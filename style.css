@@ -72,3 +72,16 @@ footer { padding: 1rem clamp(1rem, 3vw, 3rem) 2rem; color: var(--muted); font-si
   .filter-row { grid-template-columns: 1fr; }
   th:nth-child(3), td:nth-child(3), th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6) { display:none; }
 }
+.site-footer {
+  margin-top: 3rem;
+  padding: 1.25rem;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  color: #555;
+  background: #f8f8f8;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: underline;
+}
