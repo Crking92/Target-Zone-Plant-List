@@ -1,9 +1,0 @@
-file,field,meaning,dashboard_use
-kyle_site_locations_for_gpt.csv,site_id,Unique site/park/open-space ID from Parks.geojson PARK_ID when available.,Join/filter key for park context.
-kyle_site_locations_for_gpt.csv,site_name,Official or source-provided park/open-space name.,Human-readable site label.
-kyle_site_locations_for_gpt.csv,city_owned,yes if owner field equals City of Kyle.,City-owned parks only filter.
-kyle_site_locations_for_gpt.csv,center_lat/center_lon,Approximate bounding-box center for text reference only.,Do not use for spatial joins; use GeoJSON geometry.
-kyle_trail_corridors_for_gpt.csv,trail_id,Unique trail segment ID from VybeTrails.geojson TRAIL_ID.,Trail segment reference key.
-kyle_trail_corridors_for_gpt.csv,status,"Source trail status such as Existing, Proposed, In Review, Upgrade, etc.",Filter trail analyses by current/proposed status.
-kyle_management_zones_template.csv,esa_tier,"Tier 1, Tier 2, Tier 3, none, or unknown when official management polygons are available.",Future management-zone biodiversity analysis.
-kyle_watchlist_taxa_template.csv,watchlist_type,"Rare, invasive, local priority, host plant, specialist pollinator, etc.",Flag taxa in dashboard and GPT answers.

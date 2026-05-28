@@ -1,2 +1,0 @@
-scientific_name,common_name,taxon_group,watchlist_type,priority,source,source_url_or_file,applies_to,status_notes,public_display_allowed,review_owner,last_reviewed
-,,plant | insect | bird | mammal | reptile | amphibian | fungus | other,rare | state_threatened | state_endangered | invasive | local_invasive | host_plant | specialist_pollinator | monarch_resource | needs_review,critical | high | medium | low,TPWD | TXNDD | TexasInvasives | City of Kyle | local expert | uploaded CSV,,internal | public | both,,yes | no | generalize,,YYYY-MM-DD
