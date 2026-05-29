@@ -16,29 +16,44 @@
       <h1>Central Texas Plant List</h1>
       <p class="subtitle">Search by Latin name, common name, trait, habitat note, or Wildflower Center field.</p>
     </div>
+
     <div class="stat-grid" id="stats"></div>
   </header>
 
   <main>
     <section class="controls card">
       <label class="search-label" for="searchInput">Search plants</label>
-      <input id="searchInput" type="search" placeholder="Example: Vernonia, ironweed, shade, low water..." autocomplete="off" />
+
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Example: Vernonia, ironweed, shade, low water..."
+        autocomplete="off"
+      />
 
       <div class="filter-row">
         <label>Growth habit
-          <select id="habitFilter"><option value="">All</option></select>
+          <select id="habitFilter">
+            <option value="">All</option>
+          </select>
         </label>
 
         <label>Water
-          <select id="waterFilter"><option value="">All</option></select>
+          <select id="waterFilter">
+            <option value="">All</option>
+          </select>
         </label>
 
         <label>Light
-          <select id="lightFilter"><option value="">All</option></select>
+          <select id="lightFilter">
+            <option value="">All</option>
+          </select>
         </label>
 
         <label>Bloom color
-          <select id="bloomFilter"><option value="">All</option></select>
+          <select id="bloomFilter">
+            <option value="">All</option>
+          </select>
         </label>
       </div>
 
@@ -46,6 +61,16 @@
         <span id="resultCount"></span>
         <button id="clearFilters">Clear filters</button>
       </div>
+    </section>
+
+    <section class="download-box card">
+      <button type="button" id="downloadBasicPlantList" class="download-button">
+        Download basic plant list CSV
+      </button>
+
+      <p class="download-note">
+        Downloads scientific name, common name, family, growth traits, bloom traits, microregion, and source URL.
+      </p>
     </section>
 
     <section class="layout">
@@ -63,6 +88,7 @@
                 <th>Status</th>
               </tr>
             </thead>
+
             <tbody></tbody>
           </table>
         </div>
