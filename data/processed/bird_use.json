@@ -1,0 +1,176 @@
+[
+  {
+    "Plant_ID": "Abutilon fruticosum",
+    "Scientific Name": "Abutilon fruticosum",
+    "Birds Using This Plant": "Mourning Dove (Zenaida macroura); Northern Bobwhite (Colinus virginianus)",
+    "Bird Use Sources": "USDA Texas Indian Mallow Plant Fact Sheet: https://plants.usda.gov/DocumentLibrary/factsheet/pdf/fs_abfr3.pdf"
+  },
+  {
+    "Plant_ID": "Callicarpa americana",
+    "Scientific Name": "Callicarpa americana",
+    "Birds Using This Plant": "Northern Bobwhite (Colinus virginianus)",
+    "Bird Use Sources": "USFS FEIS American beautyberry: https://www.fs.usda.gov/database/feis/ | USFS FEIS American Beautyberry: https://research.fs.usda.gov/feis/species-reviews/calame"
+  },
+  {
+    "Plant_ID": "Carya illinoinensis",
+    "Scientific Name": "Carya illinoinensis",
+    "Birds Using This Plant": "Carolina Chickadee (Poecile carolinensis); Downy Woodpecker (Dryobates pubescens); Summer Tanager (Piranga rubra); Yellow Warbler (Setophaga petechia); Yellow-billed Cuckoo (Coccyzus americanus); Blue Jay (Cyanocitta cristata); Red-bellied Woodpecker (Melanerpes carolinus); Tufted Titmouse (Baeolophus bicolor); White-breasted Nuthatch (Sitta carolinensis); Wild Turkey (Meleagris gallopavo); Blue Grosbeak (Passerina caerulea); Common Grackle (Quiscalus quiscula); Mississippi Kite (Ictinia mississippiensis); Orchard Oriole (Icterus spurius)",
+    "Bird Use Sources": "USDA Pecan Plant Guide: https://plants.usda.gov/DocumentLibrary/plantguide/pdf/pg_cail2.pdf | tanager feeding specialization / riparian canopy observations | tanager diet / riparian woodland breeding | Cornell Lab / riparian forest trophic studies | USDA NRCS pecan wildlife value: https://plants.usda.gov | riparian songbird breeding / grosbeak habitat use | icterid social behavior / riparian canopy nesting | raptor nesting studies / Central Texas breeding records | Southern Plains raptor ecology / Texas urban-riparian nesting | kite breeding ecology / Central Texas observations | Cornell Lab / riparian canopy nesting studies | icterid nesting / riparian pecan studies | oriole nesting / riparian woodland studies | woodpecker foraging ecology / pecan woodland studies | woodpecker diet and nesting studies | riparian obligate bird studies / cuckoo diet"
+  },
+  {
+    "Plant_ID": "Chamaecrista fasciculata",
+    "Scientific Name": "Chamaecrista fasciculata",
+    "Birds Using This Plant": "Northern Bobwhite (Colinus virginianus)",
+    "Bird Use Sources": "Native American Seed Partridge Pea: https://seedsource.com/partridge-pea/"
+  },
+  {
+    "Plant_ID": "Commelina erecta",
+    "Scientific Name": "Commelina erecta",
+    "Birds Using This Plant": "Mourning Dove (Zenaida macroura); Northern Bobwhite (Colinus virginianus); White-winged Dove (Zenaida asiatica)",
+    "Bird Use Sources": "Bamert Seed Dayflower Plant Profile: https://bamertseed.com/plants/dayflower/"
+  },
+  {
+    "Plant_ID": "Diospyros texana",
+    "Scientific Name": "Diospyros texana",
+    "Birds Using This Plant": "Bewick's Wren (Thryomanes bewickii); Carolina Wren (Thryothorus ludovicianus); American Robin (Turdus migratorius); Cedar Waxwing (Bombycilla cedrorum); Curve-billed Thrasher (Toxostoma curvirostre); Northern Bobwhite (Colinus virginianus); Northern Mockingbird (Mimus polyglottos); Painted Bunting (Passerina ciris); Rio Grande Turkey (Meleagris gallopavo); White-winged Dove (Zenaida asiatica); Wild Turkey (Meleagris gallopavo); Golden-fronted Woodpecker (Melanerpes aurifrons); White-eyed Vireo (Vireo griseus)",
+    "Bird Use Sources": "shrub-nesting bird habitat structure studies | wren microhabitat / South-Central Texas structure research | CKWRI Texas Persimmon: https://www.ckwri.tamuk.edu/plant/texas-persimmon | frugivore diet / persimmon fruit records | Caesar Kleberg Wildlife Research Institute: https://www.ckwri.tamuk.edu/plant/texas-persimmon | bunting diet / South Texas fruit-use records | Southwest frugivore diet studies | wren ecology / South-central Texas woodland research | South Texas woodpecker ecology / persimmon fruit-use | vireo breeding ecology / shrub-tree edge habitat"
+  },
+  {
+    "Plant_ID": "Helianthus maximiliani",
+    "Scientific Name": "Helianthus maximiliani",
+    "Birds Using This Plant": "House Finch (Haemorhous mexicanus)",
+    "Bird Use Sources": "USDA NRCS Helianthus plant guide: https://www.nrcs.usda.gov"
+  },
+  {
+    "Plant_ID": "Ilex decidua",
+    "Scientific Name": "Ilex decidua",
+    "Birds Using This Plant": "Eastern Bluebird (Sialia sialis); Northern Bobwhite (Colinus virginianus); Wild Turkey (Meleagris gallopavo)",
+    "Bird Use Sources": "USFS FEIS Possumhaw: https://research.fs.usda.gov/feis/species-reviews/iledec"
+  },
+  {
+    "Plant_ID": "Ilex vomitoria",
+    "Scientific Name": "Ilex vomitoria",
+    "Birds Using This Plant": "Carolina Wren (Thryothorus ludovicianus); Northern Cardinal (Cardinalis cardinalis); American Robin (Turdus migratorius); Cedar Waxwing (Bombycilla cedrorum); Eastern Bluebird (Sialia sialis); Gray Catbird (Dumetella carolinensis); Hermit Thrush (Catharus guttatus); Mourning Dove (Zenaida macroura); Northern Bobwhite (Colinus virginianus); Northern Flicker (Colaptes auratus); Northern Mockingbird (Mimus polyglottos); White-throated Sparrow (Zonotrichia albicollis); Wild Turkey (Meleagris gallopavo); Yellow-bellied Sapsucker (Sphyrapicus varius); Orange-crowned Warbler (Leiothlypis celata); White-eyed Vireo (Vireo griseus)",
+    "Bird Use Sources": "NPSOT Yaupon: https://www.npsot.org/posts/native-plant/ilex-vomitoria/ | USDA Yaupon Fact Sheet: https://plants.sc.egov.usda.gov/DocumentLibrary/factsheet/pdf/fs_ilvo.pdf | winter frugivore ecology / yaupon berry use | Houston Audubon / TPWD Magazine: https://houstonaudubon.org/birding/resources/cedar-waxwings.html ; https://tpwmagazine.com/archive/2018/nov/scout2_flora_yaupon/ | waxwing diet / yaupon fruit phenology | Yaupon/holly wildlife-use sources: https://www.wildflower.org/plants/result.php?id_plant=ILVO | thrush winter ecology / yaupon berry dependency | NPSOT / yaupon wildlife-use sources: https://www.npsot.org/posts/native-plant/ilex-vomitoria/ ; https://www.wildflower.org/plants/result.php?id_plant=ILVO | winter frugivore studies; yaupon berry use | urban/native shrub ecology / yaupon bird-use | winter warbler diet / yaupon berry records | shrubland bird ecology / yaupon thicket nesting"
+  },
+  {
+    "Plant_ID": "Juglans nigra",
+    "Scientific Name": "Juglans nigra",
+    "Birds Using This Plant": "Great Crested Flycatcher (Myiarchus crinitus)",
+    "Bird Use Sources": "Cornell Lab + hardwood cavity guild data"
+  },
+  {
+    "Plant_ID": "Juniperus ashei",
+    "Scientific Name": "Juniperus ashei",
+    "Birds Using This Plant": "Bewick's Wren (Thryomanes bewickii); American Robin (Turdus migratorius); Cedar Waxwing (Bombycilla cedrorum); Curve-billed Thrasher (Toxostoma curvirostre); Hermit Thrush (Catharus guttatus); Northern Bobwhite (Colinus virginianus); Northern Mockingbird (Mimus polyglottos); Townsend's Solitaire (Myadestes townsendi); Wild Turkey (Meleagris gallopavo); Yellow-rumped Warbler (Setophaga coronata); Ruby-crowned Kinglet (Corthylio calendula); Ruby-crowned Kinglet (Regulus calendula); House Finch (Haemorhous mexicanus); Black-crested Titmouse (Baeolophus atricristatus); Golden-cheeked Warbler (Setophaga chrysoparia); Ash-throated Flycatcher (Myiarchus cinerascens); Field Sparrow (Spizella pusilla)",
+    "Bird Use Sources": "Edwards Plateau habitat studies | wren habitat use / juniper woodland ecology | FEIS Ashe juniper: https://www.fs.usda.gov/database/feis/plants/tree/junash/all.html | Texas A&M juniper ecology / USFS FEIS confirmation: https://texnat.tamu.edu/library/symposia/juniper-ecology-and-management/cedar-through-the-eyes-of-wildlife/ ; https://www.fs.usda.gov/database/feis/plants/tree/junash/all.html | Ashe juniper dispersal study | species diet includes juniper/cedar fruits | warbler winter diet studies / juniper berry specialization | kinglet winter ecology / evergreen foliage foraging | wintering passerine foraging ecology | finch diet studies / juniper fruit use by granivores | southern breeding bird nest material studies | TPWD / Texas A&M ecology; obligate relationship | TPWD GCW PDF: https://tpwd.texas.gov/publications/pwdpubs/media/pwd_bk_w7000_0013_golden_cheeked_warbler.pdf | TPWD / USFWS / Central Texas sources: https://tpwd.texas.gov/huntwild/wild/species/gcw/ ; https://www.fws.gov/species/golden-cheeked-warbler-setophaga-chrysoparia | southwestern flycatcher ecology / juniper woodlands | Myiarchus ecology / juniper woodland studies | sparrow nesting / juniper shrub-tree ecology | USFWS Golden-cheeked Warbler: https://www.fws.gov/species/golden-cheeked-warbler-setophaga-chrysoparia"
+  },
+  {
+    "Plant_ID": "Morus rubra",
+    "Scientific Name": "Morus rubra",
+    "Birds Using This Plant": "Carolina Chickadee (Poecile carolinensis); Downy Woodpecker (Dryobates pubescens); Red-eyed Vireo (Vireo olivaceus); Summer Tanager (Piranga rubra); Yellow Warbler (Setophaga petechia)",
+    "Bird Use Sources": "NPSOT Red Mulberry: https://www.npsot.org/posts/native-plant/morus-rubra/"
+  },
+  {
+    "Plant_ID": "Opuntia engelmannii",
+    "Scientific Name": "Opuntia engelmannii",
+    "Birds Using This Plant": "Greater Roadrunner (Geococcyx californianus)",
+    "Bird Use Sources": "Opuntia wildlife use summaries: https://www.wildflower.org/plants/"
+  },
+  {
+    "Plant_ID": "Platanus occidentalis",
+    "Scientific Name": "Platanus occidentalis",
+    "Birds Using This Plant": "Yellow-bellied Sapsucker (Sphyrapicus varius); American Goldfinch (Spinus tristis); Carolina Chickadee (Poecile carolinensis); Dark-eyed Junco (Junco hyemalis); House Finch (Haemorhous mexicanus); Pine Siskin (Spinus pinus); Purple Finch (Haemorhous purpureus); Eastern Phoebe (Sayornis phoebe); Downy Woodpecker (Dryobates pubescens); Eastern Bluebird (Sialia sialis); Eastern Kingbird (Tyrannus tyrannus); Eastern Screech-Owl (Megascops asio); Eastern Wood-Pewee (Contopus virens); Great Crested Flycatcher (Myiarchus crinitus); Red-headed Woodpecker (Melanerpes erythrocephalus); Wood Duck (Aix sponsa)",
+    "Bird Use Sources": "sapsucker feeding ecology / hardwood sapwell studies | USDA Sycamore Plant Guide: https://plants.usda.gov/DocumentLibrary/plantguide/pdf/cs_ploc.pdf | phoebe winter ecology / riparian perch use | woodpecker ecology / riparian hardwood studies | woodpecker foraging / sycamore decay-wood insect communities | cavity-nesting guild studies | kingbird breeding ecology / riparian tree use | tyrant flycatcher nesting / riparian canopy | woodpecker caching ecology / bottomland hardwoods"
+  },
+  {
+    "Plant_ID": "Prunus mexicana",
+    "Scientific Name": "Prunus mexicana",
+    "Birds Using This Plant": "American Robin (Turdus migratorius); Cedar Waxwing (Bombycilla cedrorum); Gray Catbird (Dumetella carolinensis); Northern Mockingbird (Mimus polyglottos); Orchard Oriole (Icterus spurius); Summer Tanager (Piranga rubra); Blue-gray Gnatcatcher (Polioptila caerulea); Carolina Chickadee (Poecile carolinensis); Ruby-crowned Kinglet (Regulus calendula); Yellow Warbler (Setophaga petechia)",
+    "Bird Use Sources": "NPSOT Mexican Plum: https://www.npsot.org/posts/native-plant/prunus-mexicana/ | waxwing diet / native plum fruit ecology"
+  },
+  {
+    "Plant_ID": "Prunus serotina",
+    "Scientific Name": "Prunus serotina",
+    "Birds Using This Plant": "American Robin (Turdus migratorius); Gray Catbird (Dumetella carolinensis); Northern Mockingbird (Mimus polyglottos); Orchard Oriole (Icterus spurius); Summer Tanager (Piranga rubra); Blue-gray Gnatcatcher (Polioptila caerulea); Carolina Chickadee (Poecile carolinensis); Ruby-crowned Kinglet (Regulus calendula); Yellow Warbler (Setophaga petechia)",
+    "Bird Use Sources": "USDA Black Cherry Plant Guide: https://plants.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/pg_prse2.pdf"
+  },
+  {
+    "Plant_ID": "Quercus buckleyi",
+    "Scientific Name": "Quercus buckleyi",
+    "Birds Using This Plant": "Black-and-white Warbler (Mniotilta varia); Golden-cheeked Warbler (Setophaga chrysoparia); Summer Tanager (Piranga rubra); Tufted Titmouse (Baeolophus bicolor); Blue Jay (Cyanocitta cristata); Western Kingbird (Tyrannus verticalis); Eastern Bluebird (Sialia sialis); Eastern Screech-Owl (Megascops asio); Eastern Wood-Pewee (Contopus virens); Great Crested Flycatcher (Myiarchus crinitus); Inca Dove (Columbina inca); White-winged Dove (Zenaida asiatica)",
+    "Bird Use Sources": "warbler foraging guild / oak bark insect communities | TPWD Golden-cheeked Warbler: https://tpwd.texas.gov/huntwild/wild/species/gcw/ | Cornell species account / hymenopteran specialization | titmouse nesting studies / oak canopy insect communities | corvid caching / oak regeneration studies | open woodland flycatcher studies | bluebird nesting ecology / oak savanna habitat | owl cavity-use studies / oak woodland records | pewee nesting ecology / oak woodland studies | Myiarchus nesting ecology / oak woodland breeding studies | dove nesting ecology; oak usage | dove nesting ecology / Central Texas oak woodland studies"
+  },
+  {
+    "Plant_ID": "Quercus fusiformis",
+    "Scientific Name": "Quercus fusiformis",
+    "Birds Using This Plant": "Turkey Vulture (Cathartes aura); Black-and-white Warbler (Mniotilta varia); Blue-gray Gnatcatcher (Polioptila caerulea); Brown-headed Cowbird (Molothrus ater); Carolina Chickadee (Poecile carolinensis); Golden-cheeked Warbler (Setophaga chrysoparia); Orange-crowned Warbler (Leiothlypis celata); Ruby-crowned Kinglet (Corthylio calendula); Ruby-crowned Kinglet (Regulus calendula); Summer Tanager (Piranga rubra); Yellow-rumped Warbler (Setophaga coronata); Yellow-throated Vireo (Vireo flavifrons); American Crow (Corvus brachyrhynchos); Blue Jay (Cyanocitta cristata); Mourning Dove (Zenaida macroura); Red-bellied Woodpecker (Melanerpes carolinus); White-winged Dove (Zenaida asiatica); Wild Turkey (Meleagris gallopavo); American Robin (Turdus migratorius); Black-crested Titmouse (Baeolophus atricristatus); Great Horned Owl (Bubo virginianus); Tufted Titmouse (Baeolophus bicolor)",
+    "Bird Use Sources": "vulture roost ecology / large-canopy tree use | USFS Live Oak Silvics: https://research.fs.usda.gov/silvics/live-oak | songbird nesting ecology / oak canopy insect use | generalist foraging ecology; oak insect productivity | oak caterpillar biomass used by birds | TPWD Golden-cheeked Warbler: https://tpwd.texas.gov/huntwild/wild/species/gcw/ | kinglet winter ecology / oak micro-invertebrates | Birds of the World / oak food web synthesis: https://birdsoftheworld.org | Blue Jay acorn caching behavior sources | robin winter ecology / oak woodland resource use | Edwards Plateau bird ecology / oak cavity networks | chickadee life history / oak woodland ecology | raptor nesting ecology / oak woodland nesting | titmouse ecology / oak woodland studies | vireo canopy ecology / oak woodland studies"
+  },
+  {
+    "Plant_ID": "Rhus lanceolata",
+    "Scientific Name": "Rhus lanceolata",
+    "Birds Using This Plant": "Northern Bobwhite (Colinus virginianus)",
+    "Bird Use Sources": "TxSmartScape Prairie Flameleaf Sumac: https://txsmartscape.com/plant-search/prairie-flameleaf-sumac"
+  },
+  {
+    "Plant_ID": "Salix nigra",
+    "Scientific Name": "Salix nigra",
+    "Birds Using This Plant": "Common Yellowthroat (Geothlypis trichas); Yellow-breasted Chat (Icteria virens); Yellow Warbler (Setophaga petechia); Green Kingfisher (Chloroceryle americana); Vermilion Flycatcher (Pyrocephalus rubinus)",
+    "Bird Use Sources": "wetland warbler ecology / willow thickets | riparian shrubland bird studies | USFWS / willow-warbler trophic literature: https://www.fws.gov/species/golden-cheeked-warbler-setophaga-chrysoparia | kingfisher habitat studies / Texas river observations | flycatcher habitat / riparian edge ecology | southwestern flycatcher nesting ecology | southwestern flycatcher ecology / riparian observations | riparian songbird breeding / willow associations | riparian warbler ecology / willow nesting | warbler riparian nesting / willow-associated ecology"
+  },
+  {
+    "Plant_ID": "Salvia greggii",
+    "Scientific Name": "Salvia greggii",
+    "Birds Using This Plant": "Ruby-throated Hummingbird (Archilochus colubris)",
+    "Bird Use Sources": "Lady Bird Johnson Wildflower Center / Audubon: https://www.wildflower.org/plants/"
+  },
+  {
+    "Plant_ID": "Sambucus nigra ssp. canadensis",
+    "Scientific Name": "Sambucus nigra ssp. canadensis",
+    "Birds Using This Plant": "American Robin (Turdus migratorius); Northern Bobwhite (Colinus virginianus); Northern Cardinal (Cardinalis cardinalis); Wild Turkey (Meleagris gallopavo)",
+    "Bird Use Sources": "USDA American Elderberry Fact Sheet: https://plants.sc.egov.usda.gov/DocumentLibrary/factsheet/pdf/fs_sanic4.pdf"
+  },
+  {
+    "Plant_ID": "Sideroxylon lanuginosum",
+    "Scientific Name": "Sideroxylon lanuginosum",
+    "Birds Using This Plant": "Northern Cardinal (Cardinalis cardinalis)",
+    "Bird Use Sources": "USDA NRCS / plant guide: https://plants.usda.gov"
+  },
+  {
+    "Plant_ID": "Taxodium distichum",
+    "Scientific Name": "Taxodium distichum",
+    "Birds Using This Plant": "Black Vulture (Coragyps atratus); Northern Rough-winged Swallow (Stelgidopteryx serripennis); Ruby-crowned Kinglet (Corthylio calendula); Yellow-throated Warbler (Setophaga dominica); Belted Kingfisher (Megaceryle alcyon); Eastern Phoebe (Sayornis phoebe); Green Heron (Butorides virescens); Cliff Swallow (Petrochelidon pyrrhonota); Great Blue Heron (Ardea herodias); Northern Parula (Setophaga americana); Red-shouldered Hawk (Buteo lineatus); Wood Duck (Aix sponsa)",
+    "Bird Use Sources": "vulture communal roost studies / riparian tree use | swallow roosting ecology / riparian snag use | kinglet winter ecology / riparian forest insects | warbler habitat specialization / cypress foraging | warbler microhabitat / cypress specialist foraging | kingfisher hunting ecology / riparian behavior | phoebe foraging ecology / riparian perch use | wading bird behavior / riparian perch usage | swallow nesting ecology / riparian mud source dependency | wading bird rookery studies / Texas river colony records | warbler nesting ecology / epiphyte nesting records | Parula nesting ecology / southeastern riparian forest studies | raptor nesting ecology / riparian forest studies | southeastern raptor / Texas riparian nesting studies | southeastern raptor / Texas riparian forest studies | waterfowl nesting ecology / bottomland forest cavities"
+  },
+  {
+    "Plant_ID": "Ulmus americana",
+    "Scientific Name": "Ulmus americana",
+    "Birds Using This Plant": "Barred Owl (Strix varia); Carolina Chickadee (Poecile carolinensis)",
+    "Bird Use Sources": "owl nesting ecology / bottomland hardwood cavity use | chickadee nesting ecology / elm insect productivity"
+  },
+  {
+    "Plant_ID": "Ulmus crassifolia",
+    "Scientific Name": "Ulmus crassifolia",
+    "Birds Using This Plant": "Black-and-white Warbler (Mniotilta varia); Red-eyed Vireo (Vireo olivaceus); Tufted Titmouse (Baeolophus bicolor); Yellow-rumped Warbler (Setophaga coronata); Lesser Goldfinch (Spinus psaltria); Wild Turkey (Meleagris gallopavo); Sharp-shinned Hawk (Accipiter striatus); Barred Owl (Strix varia); Carolina Chickadee (Poecile carolinensis); Cooper's Hawk (Accipiter cooperii); Eastern Bluebird (Sialia sialis); Golden-cheeked Warbler (Setophaga chrysoparia); Golden-fronted Woodpecker (Melanerpes aurifrons); Great Crested Flycatcher (Myiarchus crinitus); House Wren (Troglodytes aedon)",
+    "Bird Use Sources": "warbler foraging / deciduous forest ecology | vireo breeding ecology / elm canopy insect use | cedar elm provides seeds, nesting, and insect resources | NPSOT | finch diet studies / elm seed use | USFS Silvics: Cedar Elm: https://research.fs.usda.gov/silvics/cedar-elm | Accipiter winter ecology / woodland canopy hunting | owl nesting ecology / riparian hardwood cavities | Texas Breeding Bird Atlas | chickadee nesting ecology / deciduous cavity-use | Accipiter nesting ecology / urban-riparian records | Accipiter nesting ecology / woodland canopy | bluebird nesting ecology / savanna tree use | TPWD GCW PDF: https://tpwd.texas.gov/publications/pwdpubs/media/pwd_bk_w7000_0013_golden_cheeked_warbler.pdf | Texas woodpecker ecology / elm usage | Myiarchus nesting ecology / deciduous cavity studies | wren nesting ecology / elm cavity studies | wren nesting ecology / woodland cavities"
+  },
+  {
+    "Plant_ID": "Ungnadia speciosa",
+    "Scientific Name": "Ungnadia speciosa",
+    "Birds Using This Plant": "Black-crested Titmouse (Baeolophus atricristatus); Blue-gray Gnatcatcher (Polioptila caerulea); Carolina Chickadee (Poecile carolinensis); Ruby-crowned Kinglet (Regulus calendula)",
+    "Bird Use Sources": "NPSOT Mexican Buckeye: https://www.npsot.org/posts/native-plant/ungnadia-speciosa/"
+  },
+  {
+    "Plant_ID": "Vachellia farnesiana",
+    "Scientific Name": "Vachellia farnesiana",
+    "Birds Using This Plant": "Lesser Goldfinch (Spinus psaltria); Painted Bunting (Passerina ciris)",
+    "Bird Use Sources": "goldfinch feeding ecology / thornscrub habitat | bunting breeding ecology / South Texas thornscrub"
+  },
+  {
+    "Plant_ID": "Vitis mustangensis",
+    "Scientific Name": "Vitis mustangensis",
+    "Birds Using This Plant": "American Robin (Turdus migratorius); Brown Thrasher (Toxostoma rufum); Cedar Waxwing (Bombycilla cedrorum); Northern Cardinal (Cardinalis cardinalis)",
+    "Bird Use Sources": "USFS FEIS Vitis spp. / regional wildlife synthesis: https://www.fs.usda.gov/database/feis/"
+  }
+]
