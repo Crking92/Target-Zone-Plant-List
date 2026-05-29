@@ -1,6 +1,5 @@
 // Basic plant list download button.
 // This reads the dashboard's existing window.PLANT_DATA and makes a simple CSV.
-// No extra spreadsheet is required.
 
 (function () {
   const BASIC_COLUMNS = [
@@ -40,10 +39,15 @@
 
   function buildBasicCsv() {
     const plants = Array.isArray(window.PLANT_DATA) ? window.PLANT_DATA : [];
+
     const header = BASIC_COLUMNS.map(col => csvEscape(col.label)).join(",");
+
     const lines = plants.map(row => {
-      return BASIC_COLUMNS.map(col => csvEscape(getValue(row, col.keys))).join(",");
+      return BASIC_COLUMNS.map(col => {
+        return csvEscape(getValue(row, col.keys));
+      }).join(",");
     });
+
     return [header, ...lines].join("\n");
   }
 
@@ -51,50 +55,34 @@
     const csv = buildBasicCsv();
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
+
     const link = document.createElement("a");
     const date = new Date().toISOString().slice(0, 10);
+
     link.href = url;
     link.download = `target_zone_basic_plant_list_${date}.csv`;
+
     document.body.appendChild(link);
     link.click();
     link.remove();
+
     URL.revokeObjectURL(url);
   }
 
-  function addButton() {
-    if (document.getElementById("downloadBasicPlantList")) return;
+  function connectButton() {
+    const button = document.getElementById("downloadBasicPlantList");
 
-    const box = document.createElement("div");
-    box.className = "download-box";
-    box.innerHTML = `
-      <button type="button" id="downloadBasicPlantList" class="download-button">
-        Download basic plant list CSV
-      </button>
-      <p class="download-note">
-        Downloads scientific name, common name, family, growth traits, bloom traits, microregion, and source URL.
-      </p>
-    `;
-
-    const filters = document.querySelector(".filters");
-    const header = document.querySelector("header");
-    const main = document.querySelector("main");
-
-    if (filters && filters.parentNode) {
-      filters.parentNode.insertBefore(box, filters);
-    } else if (header && header.parentNode) {
-      header.parentNode.insertBefore(box, header.nextSibling);
-    } else if (main) {
-      main.prepend(box);
-    } else {
-      document.body.prepend(box);
+    if (!button) {
+      console.warn("Download button not found. Check index.html for id='downloadBasicPlantList'.");
+      return;
     }
 
-    document.getElementById("downloadBasicPlantList").addEventListener("click", downloadBasicList);
+    button.addEventListener("click", downloadBasicList);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", addButton);
+    document.addEventListener("DOMContentLoaded", connectButton);
   } else {
-    addButton();
+    connectButton();
   }
 })();
