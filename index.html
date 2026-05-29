@@ -4,8 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Central Texas Plant Dashboard</title>
+
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="download_button_style.css" />
 </head>
+
 <body>
   <header class="hero">
     <div>
@@ -20,21 +23,29 @@
     <section class="controls card">
       <label class="search-label" for="searchInput">Search plants</label>
       <input id="searchInput" type="search" placeholder="Example: Vernonia, ironweed, shade, low water..." autocomplete="off" />
+
       <div class="filter-row">
         <label>Growth habit
           <select id="habitFilter"><option value="">All</option></select>
         </label>
+
         <label>Water
           <select id="waterFilter"><option value="">All</option></select>
         </label>
+
         <label>Light
           <select id="lightFilter"><option value="">All</option></select>
         </label>
+
         <label>Bloom color
           <select id="bloomFilter"><option value="">All</option></select>
         </label>
       </div>
-      <div class="result-meta"><span id="resultCount"></span><button id="clearFilters">Clear filters</button></div>
+
+      <div class="result-meta">
+        <span id="resultCount"></span>
+        <button id="clearFilters">Clear filters</button>
+      </div>
     </section>
 
     <section class="layout">
@@ -64,14 +75,25 @@
   </main>
 
   <footer>
-    <p>Plant_ID is the Scientific Name. Microregion fields are merged into each plant record by Scientific Name so plant searches stay one row per plant.</p>
-    <p>Plant profile data were compiled from the Lady Bird Johnson Wildflower Center Native Plants Database. Hays County microregion data are displayed as a separate section on each plant record when available.</p>
-    <p>Selected images, when available, are loaded from Wikimedia Commons. Image credits and licenses are displayed with each image.</p>
-      <p>Propagation data, where available, are merged by Scientific Name from Native Plant Society of Texas native plant profile data. Each matched plant card displays its NPSOT plant-page source URL and listed propagation references.</p>
-      <p>Plant photos, when available, are loaded first from iNaturalist observations with reusable Creative Commons photo licenses. If no suitable iNaturalist photo is found, the dashboard tries Wikimedia Commons. Photo creator, source link, and license are displayed with each image.</p>
+    <p>
+      Plant_ID is the Scientific Name. Microregion fields are merged into each plant record by Scientific Name so plant searches stay one row per plant.
+    </p>
+
+    <p>
+      Plant profile data were compiled from the Lady Bird Johnson Wildflower Center Native Plants Database. Hays County microregion data are displayed as a separate section on each plant record when available.
+    </p>
+
+    <p>
+      Plant photos, when available, are loaded first from iNaturalist observations with reusable Creative Commons photo licenses. If no suitable iNaturalist photo is found, the dashboard tries Wikimedia Commons. Photo creator, source link, and license are displayed with each image.
+    </p>
+
+    <p>
+      Propagation data, where available, are merged by Scientific Name from Native Plant Society of Texas native plant profile data. Each matched plant card displays its NPSOT plant-page source URL and listed propagation references.
+    </p>
   </footer>
 
   <script src="data/processed/plants.js"></script>
   <script src="app.js"></script>
+  <script src="download_basic_list.js"></script>
 </body>
 </html>
