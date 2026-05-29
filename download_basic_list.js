@@ -1,88 +1,125 @@
-// Basic plant list download button.
-// This reads the dashboard's existing window.PLANT_DATA and makes a simple CSV.
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Central Texas Plant Dashboard</title>
 
-(function () {
-  const BASIC_COLUMNS = [
-    { label: "Scientific Name", keys: ["Scientific Name", "Plant_ID"] },
-    { label: "Common Name(s)", keys: ["Common Name(s)", "Common Name", "Common Names"] },
-    { label: "Family", keys: ["Family", "Family Name"] },
-    { label: "Growth Habit", keys: ["Growth Habitat", "Habit", "Growth Habit"] },
-    { label: "Duration", keys: ["Duration"] },
-    { label: "Light Requirement", keys: ["Sun/Shade Requirements", "Light Requirement", "Light Requirements"] },
-    { label: "Water Requirement", keys: ["Water Req.", "Water Use", "Water Requirement", "Water Requirements"] },
-    { label: "Soil Moisture", keys: ["Soil Moisture"] },
-    { label: "Bloom Time", keys: ["Bloom Time"] },
-    { label: "Bloom Color", keys: ["Bloom Color", "Bloom Colour"] },
-    { label: "Primary Microregion", keys: ["Primary Microregion"] },
-    { label: "Microregion Group", keys: ["Microregion Group"] },
-    { label: "Fine Habitat Tags", keys: ["Fine Habitat Tags"] },
-    { label: "Wildflower Center URL", keys: ["LBJ URL", "Microregion LBJ Profile URL", "LBJ Manual URL"] }
-  ];
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="download_button_style.css" />
+</head>
 
-  function getValue(row, keys) {
-    for (const key of keys) {
-      const value = row && row[key];
-      if (value !== undefined && value !== null && String(value).trim() !== "") {
-        return String(value).trim();
-      }
-    }
-    return "";
-  }
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Target Zone Plant Dashboard</p>
+      <h1>Central Texas Plant List</h1>
+      <p class="subtitle">Search by Latin name, common name, trait, habitat note, or Wildflower Center field.</p>
+    </div>
 
-  function csvEscape(value) {
-    const text = String(value ?? "");
-    if (/[",\n\r]/.test(text)) {
-      return `"${text.replace(/"/g, '""')}"`;
-    }
-    return text;
-  }
+    <div class="stat-grid" id="stats"></div>
+  </header>
 
-  function buildBasicCsv() {
-    const plants = Array.isArray(window.PLANT_DATA) ? window.PLANT_DATA : [];
+  <main>
+    <section class="controls card">
+      <label class="search-label" for="searchInput">Search plants</label>
 
-    const header = BASIC_COLUMNS.map(col => csvEscape(col.label)).join(",");
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Example: Vernonia, ironweed, shade, low water..."
+        autocomplete="off"
+      />
 
-    const lines = plants.map(row => {
-      return BASIC_COLUMNS.map(col => {
-        return csvEscape(getValue(row, col.keys));
-      }).join(",");
-    });
+      <div class="filter-row">
+        <label>Growth habit
+          <select id="habitFilter">
+            <option value="">All</option>
+          </select>
+        </label>
 
-    return [header, ...lines].join("\n");
-  }
+        <label>Water
+          <select id="waterFilter">
+            <option value="">All</option>
+          </select>
+        </label>
 
-  function downloadBasicList() {
-    const csv = buildBasicCsv();
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
+        <label>Light
+          <select id="lightFilter">
+            <option value="">All</option>
+          </select>
+        </label>
 
-    const link = document.createElement("a");
-    const date = new Date().toISOString().slice(0, 10);
+        <label>Bloom color
+          <select id="bloomFilter">
+            <option value="">All</option>
+          </select>
+        </label>
+      </div>
 
-    link.href = url;
-    link.download = `target_zone_basic_plant_list_${date}.csv`;
+      <div class="result-meta">
+        <span id="resultCount"></span>
+        <button id="clearFilters">Clear filters</button>
+      </div>
+    </section>
 
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    <section class="download-box card">
+      <button type="button" id="downloadBasicPlantList" class="download-button">
+        Download basic plant list CSV
+      </button>
 
-    URL.revokeObjectURL(url);
-  }
+      <p class="download-note">
+        Downloads scientific name, common name, family, growth traits, bloom traits, microregion, and source URL.
+      </p>
+    </section>
 
-  function connectButton() {
-    const button = document.getElementById("downloadBasicPlantList");
+    <section class="layout">
+      <section class="card table-card">
+        <div class="table-wrap">
+          <table id="plantTable">
+            <thead>
+              <tr>
+                <th>Scientific Name</th>
+                <th>Common Name(s)</th>
+                <th>Habit</th>
+                <th>Water</th>
+                <th>Light</th>
+                <th>Bloom</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-    if (!button) {
-      console.warn("Download button not found. Check index.html for id='downloadBasicPlantList'.");
-      return;
-    }
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
 
-    button.addEventListener("click", downloadBasicList);
-  }
+      <aside class="card detail-card" id="detailPanel">
+        <p class="empty-detail">Select a plant to see its full record.</p>
+      </aside>
+    </section>
+  </main>
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", connectButton);
-  } else {
-    connectButton();
-  }
-})();
+  <footer>
+    <p>
+      Plant_ID is the Scientific Name. Microregion fields are merged into each plant record by Scientific Name so plant searches stay one row per plant.
+    </p>
+
+    <p>
+      Plant profile data were compiled from the Lady Bird Johnson Wildflower Center Native Plants Database. Hays County microregion data are displayed as a separate section on each plant record when available.
+    </p>
+
+    <p>
+      Plant photos, when available, are loaded first from iNaturalist observations with reusable Creative Commons photo licenses. If no suitable iNaturalist photo is found, the dashboard tries Wikimedia Commons. Photo creator, source link, and license are displayed with each image.
+    </p>
+
+    <p>
+      Propagation data, where available, are merged by Scientific Name from Native Plant Society of Texas native plant profile data. Each matched plant card displays its NPSOT plant-page source URL and listed propagation references.
+    </p>
+  </footer>
+
+  <script src="data/processed/plants.js"></script>
+  <script src="app.js"></script>
+  <script src="download_basic_list.js"></script>
+</body>
+</html>
