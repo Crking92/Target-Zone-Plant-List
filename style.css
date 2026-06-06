@@ -1,0 +1,187 @@
+:root {
+  --bg: #f4f1ea;
+  --card: #ffffff;
+  --ink: #1e2b22;
+  --muted: #697568;
+  --line: #d9ded3;
+  --accent: #336b3f;
+  --accent-2: #8a5a2b;
+  --soft: #e9efe4;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: end;
+  padding: 2rem clamp(1rem, 3vw, 3rem);
+  background: linear-gradient(135deg, #f8f6ef, #dfebda);
+  border-bottom: 1px solid var(--line);
+}
+.eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; color: var(--accent-2); font-weight: 700; }
+h1 { margin: .1rem 0; font-size: clamp(2rem, 4vw, 4rem); line-height: .95; }
+.subtitle { margin: 0; color: var(--muted); max-width: 760px; }
+.stat-grid { display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: .75rem; min-width: 260px; }
+.stat { background: rgba(255,255,255,.72); border: 1px solid var(--line); padding: .9rem; border-radius: 1rem; }
+.stat strong { display: block; font-size: 1.4rem; }
+.stat span { color: var(--muted); font-size: .84rem; }
+main { padding: 1.25rem clamp(1rem, 3vw, 3rem) 3rem; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(33,45,33,.06); }
+.controls { padding: 1rem; margin-bottom: 1rem; }
+.search-label { display: block; font-weight: 700; margin-bottom: .5rem; }
+#searchInput { width: 100%; font-size: 1rem; padding: .9rem 1rem; border: 1px solid var(--line); border-radius: .9rem; }
+.filter-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .75rem; margin-top: .85rem; }
+.filter-row label { font-size: .82rem; color: var(--muted); }
+select { width: 100%; margin-top: .25rem; padding: .65rem; border: 1px solid var(--line); border-radius: .75rem; background: #fff; color: var(--ink); }
+.result-meta { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: .75rem; color: var(--muted); }
+button { border: 1px solid var(--accent); background: var(--accent); color: #fff; padding: .55rem .8rem; border-radius: .75rem; cursor: pointer; }
+.layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(360px, .75fr); gap: 1rem; align-items: start; }
+.table-card { overflow: hidden; }
+.table-wrap { max-height: 70vh; overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th { position: sticky; top: 0; background: #eef3e9; text-align: left; color: #334435; z-index: 1; }
+th, td { padding: .75rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr { cursor: pointer; }
+tbody tr:hover { background: #f7faf4; }
+tbody tr.selected { background: var(--soft); }
+.sciname { font-style: italic; font-weight: 700; }
+.detail-card { padding: 1rem; position: sticky; top: 1rem; max-height: 80vh; overflow: auto; }
+.detail-card h2 { margin: 0 0 .25rem; font-style: italic; }
+.common { color: var(--accent-2); font-weight: 700; margin-top: 0; }
+.detail-grid { display: grid; gap: .75rem; }
+.detail-section { border-top: 1px solid var(--line); padding-top: .75rem; }
+.detail-section h3 { margin: 0 0 .4rem; font-size: .95rem; color: var(--accent); }
+.field { display: grid; grid-template-columns: 135px minmax(0, 1fr); gap: .5rem; padding: .25rem 0; }
+.field dt { font-size: .78rem; color: var(--muted); }
+.field dd { margin: 0; word-break: break-word; }
+a { color: var(--accent); }
+.empty-detail { color: var(--muted); }
+footer { padding: 1rem clamp(1rem, 3vw, 3rem) 2rem; color: var(--muted); font-size: .9rem; }
+@media (max-width: 1050px) {
+  .hero, .layout { grid-template-columns: 1fr; display: grid; }
+  .stat-grid, .filter-row { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .detail-card { position: static; }
+}
+@media (max-width: 640px) {
+  .filter-row { grid-template-columns: 1fr; }
+  th:nth-child(3), td:nth-child(3), th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6) { display:none; }
+}
+
+
+/* Wikimedia Commons photo area */
+.photo-section {
+  margin: 0.75rem 0 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fafbf8;
+}
+
+.commons-figure {
+  margin: 0;
+}
+
+.commons-figure img {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  background: #eef3e9;
+}
+
+.commons-figure figcaption,
+.photo-loading,
+.photo-missing {
+  margin: 0;
+  padding: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.commons-figure figcaption a {
+  color: var(--accent);
+}
+
+
+/* iNaturalist-first plant photo area */
+.photo-section {
+  margin: 0.75rem 0 1rem;
+  border: 1px solid var(--line, #d8ded2);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fafbf8;
+}
+
+.plant-photo-figure,
+.commons-figure {
+  margin: 0;
+}
+
+.plant-photo-figure img,
+.commons-figure img {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  background: #eef3e9;
+}
+
+.plant-photo-figure figcaption,
+.commons-figure figcaption,
+.photo-loading,
+.photo-missing {
+  margin: 0;
+  padding: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--muted, #586052);
+  line-height: 1.35;
+}
+
+.plant-photo-figure figcaption a,
+.commons-figure figcaption a {
+  color: var(--accent, #386641);
+}
+
+.photo-provider-note {
+  font-weight: 600;
+}
+
+
+/* Photo gallery controls */
+.photo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.75rem;
+  border-top: 1px solid var(--line, #d8ded2);
+  background: #f4f7f0;
+}
+
+.photo-button {
+  border: 1px solid var(--line, #d8ded2);
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  background: white;
+  color: var(--text, #24301f);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.photo-button:hover {
+  background: #eef3e9;
+}
+
+.photo-count {
+  font-size: 0.82rem;
+  color: var(--muted, #586052);
+  white-space: nowrap;
+}
