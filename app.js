@@ -66,6 +66,118 @@ fillSelect(waterFilter, uniqueOptions(fields.water));
 fillSelect(lightFilter, uniqueOptions(fields.light));
 fillSelect(bloomFilter, uniqueOptions(fields.bloom));
 
+
+/* --------------------------------------------------------------------------
+   Shareable filters and deep links
+   Supported URL parameters:
+   q=search text
+   habit=growth habit (partial matching is allowed)
+   water=water requirement (partial matching is allowed)
+   light=light requirement (partial matching is allowed)
+   bloom=bloom color (partial matching is allowed)
+   plant=exact scientific name or common name to open
+   -------------------------------------------------------------------------- */
+
+const dashboardUrl = new URL(window.location.href);
+let urlSyncTimer = null;
+
+function matchSelectOption(select, requestedValue) {
+  const wanted = norm(requestedValue);
+  if (!wanted) return "";
+
+  const options = [...select.options].filter(option => option.value);
+  const exact = options.find(option => norm(option.value) === wanted);
+  if (exact) return exact.value;
+
+  const partial = options.find(option => {
+    const optionValue = norm(option.value);
+    return optionValue.includes(wanted) || wanted.includes(optionValue);
+  });
+  return partial ? partial.value : "";
+}
+
+function applyUrlFilters() {
+  const params = new URLSearchParams(window.location.search);
+
+  searchInput.value = params.get("q") || "";
+  habitFilter.value = matchSelectOption(habitFilter, params.get("habit") || "");
+  waterFilter.value = matchSelectOption(waterFilter, params.get("water") || "");
+  lightFilter.value = matchSelectOption(lightFilter, params.get("light") || "");
+  bloomFilter.value = matchSelectOption(bloomFilter, params.get("bloom") || "");
+}
+
+function findPlantFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const requestedPlant = norm(params.get("plant") || "");
+  if (!requestedPlant) return null;
+
+  return plants.find(plant => {
+    const scientific = norm(get(plant, fields.sci));
+    const common = norm(get(plant, fields.common));
+    const id = norm(plant.Plant_ID || "");
+    return scientific === requestedPlant ||
+      common === requestedPlant ||
+      id === requestedPlant;
+  }) || null;
+}
+
+function buildShareUrl() {
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams();
+
+  if (searchInput.value.trim()) params.set("q", searchInput.value.trim());
+  if (habitFilter.value) params.set("habit", habitFilter.value);
+  if (waterFilter.value) params.set("water", waterFilter.value);
+  if (lightFilter.value) params.set("light", lightFilter.value);
+  if (bloomFilter.value) params.set("bloom", bloomFilter.value);
+  if (selectedId) params.set("plant", selectedId);
+
+  url.search = params.toString();
+  url.hash = "";
+  return url;
+}
+
+function syncUrl() {
+  const url = buildShareUrl();
+  window.history.replaceState({}, "", url);
+}
+
+function scheduleUrlSync() {
+  window.clearTimeout(urlSyncTimer);
+  urlSyncTimer = window.setTimeout(syncUrl, 180);
+}
+
+function addShareButton() {
+  const clearButton = document.getElementById("clearFilters");
+  if (!clearButton || document.getElementById("shareFilters")) return;
+
+  const shareButton = document.createElement("button");
+  shareButton.type = "button";
+  shareButton.id = "shareFilters";
+  shareButton.textContent = "Copy filtered link";
+  shareButton.style.marginLeft = ".5rem";
+
+  shareButton.addEventListener("click", async () => {
+    syncUrl();
+    const shareUrl = buildShareUrl().toString();
+    const originalText = shareButton.textContent;
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      shareButton.textContent = "Link copied";
+    } catch (error) {
+      window.prompt("Copy this filtered dashboard link:", shareUrl);
+      shareButton.textContent = "Link ready";
+    }
+
+    window.setTimeout(() => {
+      shareButton.textContent = originalText;
+    }, 1800);
+  });
+
+  clearButton.insertAdjacentElement("afterend", shareButton);
+}
+
 function includesFilter(value, filter) {
   if (!filter) return true;
   return norm(value).includes(norm(filter));
@@ -89,6 +201,27 @@ function filteredPlants() {
       includesFilter(get(p, fields.light), lightFilter.value) &&
       includesFilter(get(p, fields.bloom), bloomFilter.value);
   }).sort(alphaPlantCompare);
+}
+
+function refreshFilteredResults() {
+  const visiblePlants = filteredPlants();
+  const selectedStillVisible = selectedId && visiblePlants.some(plant => {
+    const id = plant.Plant_ID || get(plant, fields.sci);
+    return id === selectedId;
+  });
+
+  if (!selectedStillVisible) {
+    const firstPlant = visiblePlants[0] || null;
+    selectedId = firstPlant ? (firstPlant.Plant_ID || get(firstPlant, fields.sci)) : null;
+
+    if (firstPlant) {
+      renderDetail(firstPlant);
+    } else {
+      detailPanel.innerHTML = '<p class="empty-detail">No plants match these filters. Try clearing one filter or using a broader search.</p>';
+    }
+  }
+
+  renderTable();
 }
 function renderStats() {
   const statuses = new Set(plants.map(p => get(p, fields.lbjStatus)).filter(Boolean));
@@ -116,7 +249,7 @@ function renderTable() {
       <td>${esc(get(p, fields.light))}</td>
       <td>${esc(get(p, fields.bloom))}</td>
       <td>${esc(get(p, fields.lbjStatus))}</td>`;
-    tr.addEventListener("click", () => { selectedId = id; renderDetail(p); renderTable(); });
+    tr.addEventListener("click", () => { selectedId = id; renderDetail(p); renderTable(); syncUrl(); });
     tbody.appendChild(tr);
   }
 }
@@ -486,9 +619,46 @@ function renderDetail(p) {
 }
 
 document.getElementById("clearFilters").addEventListener("click", () => {
-  searchInput.value = ""; habitFilter.value = ""; waterFilter.value = ""; lightFilter.value = ""; bloomFilter.value = ""; renderTable();
+  searchInput.value = "";
+  habitFilter.value = "";
+  waterFilter.value = "";
+  lightFilter.value = "";
+  bloomFilter.value = "";
+  selectedId = null;
+
+  const firstPlant = plants.slice().sort(alphaPlantCompare)[0] || null;
+  if (firstPlant) {
+    selectedId = firstPlant.Plant_ID || get(firstPlant, fields.sci);
+    renderDetail(firstPlant);
+  }
+
+  refreshFilteredResults();
+  syncUrl();
 });
-[searchInput, habitFilter, waterFilter, lightFilter, bloomFilter].forEach(el => el.addEventListener("input", renderTable));
+
+[searchInput, habitFilter, waterFilter, lightFilter, bloomFilter].forEach(element => {
+  element.addEventListener("input", () => {
+    refreshFilteredResults();
+    scheduleUrlSync();
+  });
+  element.addEventListener("change", () => {
+    refreshFilteredResults();
+    syncUrl();
+  });
+});
+
 renderStats();
+applyUrlFilters();
+addShareButton();
+
+const linkedPlant = findPlantFromUrl();
+const firstVisiblePlant = filteredPlants()[0] || plants.slice().sort(alphaPlantCompare)[0] || null;
+const initialPlant = linkedPlant || firstVisiblePlant;
+
+if (initialPlant) {
+  selectedId = initialPlant.Plant_ID || get(initialPlant, fields.sci);
+  renderDetail(initialPlant);
+}
+
 renderTable();
-if (plants[0]) { selectedId = plants[0].Plant_ID || get(plants[0], fields.sci); renderDetail(plants[0]); renderTable(); }
+syncUrl();
