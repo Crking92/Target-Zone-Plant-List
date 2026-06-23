@@ -130,8 +130,20 @@
     </p>
   </footer>
 
-  <script src="data/processed/plants.js?v=public-strict-20260623"></script>
-  <script src="app.js?v=public-strict-20260623"></script>
-  <script src="download_basic_list.js?v=public-strict-20260623"></script>
+  <script>
+    window.addEventListener("error", function (event) {
+      var target = event.target || {};
+      if (target.tagName === "SCRIPT") {
+        var panel = document.getElementById("detailPanel");
+        var stats = document.getElementById("stats");
+        var msg = "A dashboard script did not load: " + (target.getAttribute("src") || "unknown file") + ". Check that the data/processed folder was uploaded to GitHub with the same path.";
+        if (panel) panel.innerHTML = '<p class="empty-detail"><strong>Data load problem.</strong> ' + msg + '</p>';
+        if (stats) stats.innerHTML = '<div class="stat"><strong>!</strong><span>Data file missing</span></div>';
+      }
+    }, true);
+  </script>
+  <script src="data/processed/plants_public_v3.js"></script>
+  <script src="app_public_v3.js"></script>
+  <script src="download_basic_list_public_v3.js"></script>
 </body>
 </html>

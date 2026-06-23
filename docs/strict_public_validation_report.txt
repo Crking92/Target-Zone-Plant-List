@@ -1,3 +1,7 @@
 PASS: strict public data files contain no known full NPSOT protocol phrase, no NPSOT instruction column name, no wp-admin URLs, and no Photo Credit text.
 PASS: plants.csv has no unexpected long public text fields over 450 characters.
 PASS: propagation_npsot.csv has no unexpected long public text fields over 450 characters.
+
+V3 patch: fixed app.js firstValue duplicate wrapper bug that prevented dashboard initialization. Updated script cache-busting query string.
+
+V3: Added renamed JavaScript files and script-load diagnostics. Public plant data count remains 315 rows.
