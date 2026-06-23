@@ -31,10 +31,16 @@
     { label: "Soil Moisture", keys: ["Soil Moisture"] },
     { label: "Bloom Time", keys: ["Bloom Time"] },
     { label: "Bloom Color", keys: ["Bloom Color", "Bloom Colour"] },
+    { label: "Attracts", keys: ["Attracts"] },
+    { label: "Larval Host", keys: ["Larval Host"] },
     { label: "Primary Microregion", keys: ["Primary Microregion"] },
     { label: "Microregion Group", keys: ["Microregion Group"] },
     { label: "Fine Habitat Tags", keys: ["Fine Habitat Tags"] },
-    { label: "Wildflower Center URL", keys: ["LBJ URL", "Microregion LBJ Profile URL", "LBJ Manual URL"] }
+    { label: "Propagation Materials", keys: ["NPSOT Propagation Materials"] },
+    { label: "Propagation Treatment Tags", keys: ["NPSOT Propagation Treatment Tags"] },
+    { label: "Wildflower Center URL", keys: ["LBJ URL", "Microregion LBJ Profile URL", "LBJ Manual URL"] },
+    { label: "NPSOT Propagation URL", keys: ["NPSOT Propagation Source URL"] },
+    { label: "Public Data Note", keys: ["Public Data Note"] }
   ];
 
   function buildCsv() {

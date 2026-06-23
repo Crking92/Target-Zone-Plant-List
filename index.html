@@ -14,7 +14,7 @@
     <div>
       <p class="eyebrow">Target Zone Plant Dashboard</p>
       <h1>Central Texas Plant List</h1>
-      <p class="subtitle">Search by Latin name, common name, trait, habitat note, or Wildflower Center field.</p>
+      <p class="subtitle">Search by Latin name, common name, trait, habitat tag, propagation tag, or source-linked field.</p>
     </div>
 
     <div class="stat-grid" id="stats"></div>
@@ -77,7 +77,7 @@
       </button>
 
       <p class="download-note" style="margin: 0.6rem 0 0; font-size: 0.9rem;">
-        Downloads scientific name, common name, family, growth traits, bloom traits, microregion, and source URL.
+        Downloads structured public fields only: plant names, traits, microregion fields, propagation tags, and source links.
       </p>
     </section>
 
@@ -93,7 +93,7 @@
                 <th>Water</th>
                 <th>Light</th>
                 <th>Bloom</th>
-                <th>Status</th>
+                <th>Source</th>
               </tr>
             </thead>
 
@@ -114,7 +114,11 @@
     </p>
 
     <p>
-      Plant profile data were compiled from the Lady Bird Johnson Wildflower Center Native Plants Database. Hays County microregion data are displayed as a separate section on each plant record when available.
+      Public data policy: this dashboard displays structured plant traits, short source-attributed summaries, and links back to source pages. Long source prose, source database photos, image URLs, page boilerplate, and full propagation protocols are intentionally excluded from the browser-delivered data files.
+    </p>
+
+    <p>
+      Plant profile links point to the Lady Bird Johnson Wildflower Center Native Plants Database where available. Hays County microregion fields are displayed separately when available.
     </p>
 
     <p>
@@ -122,7 +126,7 @@
     </p>
 
     <p>
-      Propagation data, where available, are merged by Scientific Name from Native Plant Society of Texas native plant profile data. Each matched plant card displays its NPSOT plant-page source URL and listed propagation references.
+      Propagation fields are summarized from Native Plant Society of Texas data and linked source pages. This public dashboard shows materials, treatment tags, source URLs, and reference URLs rather than republishing full source protocols.
     </p>
   </footer>
 

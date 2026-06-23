@@ -31,8 +31,8 @@ const fields = {
   light: ["Sun/Shade Requirements", "Light Requirement", "Light Requirements"],
   bloom: ["Bloom Color", "Bloom Colour"],
   duration: ["Duration"],
-  lbjStatus: ["LBJ Scrape Status"],
-  lbjUrl: ["LBJ URL", "LBJ Manual URL"]
+  source: ["LBJ URL", "Microregion LBJ Profile URL", "NPSOT Propagation Source URL", "USDA Plants URL"],
+  lbjUrl: ["LBJ URL", "Microregion LBJ Profile URL", "LBJ Manual URL"]
 };
 
 const searchInput = document.getElementById("searchInput");
@@ -224,15 +224,25 @@ function refreshFilteredResults() {
   renderTable();
 }
 function renderStats() {
-  const statuses = new Set(plants.map(p => get(p, fields.lbjStatus)).filter(Boolean));
   const families = new Set(plants.map(p => get(p, fields.family)).filter(Boolean));
   const aliasCount = aliases.length;
+  const plantsWithSourceLinks = plants.filter(p => get(p, fields.source)).length;
   document.getElementById("stats").innerHTML = `
-    <div class="stat"><strong>${plants.length.toLocaleString()}</strong><span>Plant rows</span></div>
+    <div class="stat"><strong>${plants.length.toLocaleString()}</strong><span>Public plant rows</span></div>
     <div class="stat"><strong>${families.size.toLocaleString()}</strong><span>Families</span></div>
     <div class="stat"><strong>${aliasCount.toLocaleString()}</strong><span>Search aliases</span></div>
-    <div class="stat"><strong>${statuses.size.toLocaleString()}</strong><span>Scrape statuses</span></div>`;
+    <div class="stat"><strong>${plantsWithSourceLinks.toLocaleString()}</strong><span>Rows with source links</span></div>`;
 }
+
+function sourceLabel(p) {
+  const hasLbj = Boolean(get(p, ["LBJ URL", "Microregion LBJ Profile URL", "LBJ Manual URL"]));
+  const hasNpsot = Boolean(get(p, ["NPSOT Propagation Source URL"]));
+  const labels = [];
+  if (hasLbj) labels.push("Wildflower Center");
+  if (hasNpsot) labels.push("NPSOT");
+  return labels.length ? labels.join(" + ") : "source link pending";
+}
+
 function renderTable() {
   const data = filteredPlants();
   resultCount.textContent = `${data.length.toLocaleString()} of ${plants.length.toLocaleString()} plants shown`;
@@ -248,7 +258,7 @@ function renderTable() {
       <td>${esc(get(p, fields.water))}</td>
       <td>${esc(get(p, fields.light))}</td>
       <td>${esc(get(p, fields.bloom))}</td>
-      <td>${esc(get(p, fields.lbjStatus))}</td>`;
+      <td>${esc(sourceLabel(p))}</td>`;
     tr.addEventListener("click", () => { selectedId = id; renderDetail(p); renderTable(); syncUrl(); });
     tbody.appendChild(tr);
   }
@@ -535,9 +545,7 @@ const groups = [
       "Avg Width (ft)",
       "Size Notes",
       "Leaf",
-      "Soil Moisture",
-      "Soil Description",
-      "Conditions Comments"
+      "Soil Moisture"
     ]
   },
   {
@@ -545,14 +553,9 @@ const groups = [
     keys: [
       "Bloom Time",
       "Bloom Color",
-      "Bloom Notes",
-      "Benefit",
-      "Use Wildlife",
-      "Conspicuous Flowers",
       "Attracts",
       "Larval Host",
-      "Value to Beneficial Insects",
-      "Butterflies and Moths of North America (BAMONA)"
+      "Nectar Source"
     ]
   },
   {
@@ -563,37 +566,45 @@ const groups = [
     ]
   },
   {
-    title: "Range and habitat",
-    keys: [
-      "USA",
-      "Native Distribution",
-      "Native Habitat",
-      "Distribution"
-    ]
-  },
-  {
     title: "Hays County microregion",
     keys: [
       "Microregion Group",
       "Primary Microregion",
       "Secondary Microregions",
       "Fine Habitat Tags",
+      "Fine Habitat Summary",
+      "Microregion Moisture / Water / Light",
+      "Wetland Status Summary",
+      "Microregion Confidence",
+      "Microregion Review Needed",
+      "Microregion Public Status",
+      "Microregion Publication Note"
+    ]
+  },
+  {
+    title: "Propagation summary",
+    keys: [
+      "NPSOT Propagation Materials",
+      "NPSOT Propagation Treatment Tags",
+      "NPSOT Propagation Public Note",
+      "NPSOT Propagation Source URL",
+      "NPSOT Propagation References"
+    ]
+  },
+  {
+    title: "Source links",
+    keys: [
+      "LBJ URL",
+      "LBJ Manual URL",
       "Microregion LBJ Profile URL",
       "USDA Plants URL",
       "FNA Search URL",
       "Wetland Plant List URL",
       "NRCS Web Soil Survey URL",
       "EPA Ecoregions URL",
-      "TPWD EMS URL"
-    ]
-  },
-  {
-    title: "Propagation",
-    keys: [
-      "NPSOT Propagation Materials",
-      "NPSOT Propagation Instructions",
-      "NPSOT Propagation Source URL",
-      "NPSOT Propagation References"
+      "TPWD EMS URL",
+      "Microregion Source Note",
+      "Public Data Note"
     ]
   }
 ];
@@ -602,7 +613,7 @@ function renderDetail(p) {
   const sci = get(p, fields.sci);
   const common = get(p, fields.common);
   const used = new Set();
-  let html = `<h2>${esc(sci)}</h2><p class="common">${esc(common)}</p><section class="photo-section" id="plantPhoto"><p class="photo-loading">Photo area loading...</p></section><div class="detail-grid">`;
+  let html = `<h2>${esc(sci)}</h2><p class="common">${esc(common)}</p><p class="public-use-note">Public view: structured plant traits, short propagation tags, source links, and original City microregion fields. Long source prose, photos from source databases, and full propagation protocols are not redistributed here.</p><section class="photo-section" id="plantPhoto"><p class="photo-loading">Photo area loading...</p></section><div class="detail-grid">`;
   for (const group of groups) {
     const items = group.keys.filter(k => p[k] !== undefined && String(p[k]).trim() !== "");
     if (!items.length) continue;

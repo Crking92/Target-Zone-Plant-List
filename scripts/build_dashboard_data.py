@@ -10,6 +10,81 @@ BIRD_SOURCE = Path("data/raw/City_of_Kyle_TPWD_Bird_Plant_Use_Check_Master8.xlsx
 OUT = Path("data/processed")
 OUT.mkdir(parents=True, exist_ok=True)
 
+# Public release policy
+# ---------------------
+# The dashboard is designed to publish structured facts, short source-attributed
+# summaries, and links back to source pages. It intentionally excludes long
+# scraped/source prose, image URLs, page boilerplate, full propagation protocols,
+# and raw source exports from browser-delivered data files.
+PUBLIC_ROW_FIELDS = [
+    'Plant_ID', 'Scientific Name', 'Common Name(s)', 'Common Name', 'Common Names', 'Family',
+    'Duration', 'Deciduous/ Evergreen (green in winter)', 'Growth Habitat', 'Habit',
+    'Sun/Shade Requirements', 'Light Requirement', 'Light Requirements',
+    'Water Req.', 'Water Use', 'Water Requirement', 'Water Requirements',
+    'Avg Height (ft)', 'Avg Width (ft)', 'Size Notes', 'Leaf', 'Soil Moisture',
+    'Bloom Time', 'Bloom Color', 'Bloom Colour', 'Attracts', 'Larval Host', 'Nectar Source',
+    'Birds Using This Plant', 'Bird Use Sources',
+    'Microregion Group', 'Primary Microregion', 'Secondary Microregions', 'Fine Habitat Tags',
+    'Fine Habitat Summary', 'Microregion Moisture / Water / Light', 'Wetland Status Summary',
+    'Microregion Confidence', 'Microregion Review Needed', 'Microregion Public Status',
+    'Microregion Publication Note', 'Microregion Source Note', 'Microregion Dataset Version',
+    'Microregion Last Updated', 'Microregion Online Slug',
+    'LBJ URL', 'LBJ Manual URL', 'Microregion LBJ Profile URL', 'USDA Plants URL',
+    'FNA Search URL', 'Wetland Plant List URL', 'NRCS Web Soil Survey URL', 'EPA Ecoregions URL',
+    'TPWD EMS URL',
+    'NPSOT Propagation Common Name', 'NPSOT Propagation Materials',
+    'NPSOT Propagation Treatment Tags', 'NPSOT Propagation Public Note',
+    'NPSOT Propagation Source URL', 'NPSOT Propagation References',
+    'Public Data Note'
+]
+
+PUBLIC_DATA_NOTE = (
+    'Public dashboard field. Long source prose, photos, image URLs, full source protocols, '
+    'and page boilerplate are intentionally excluded from public data files. Use linked '
+    'source pages for full context.'
+)
+
+def extract_urls(text):
+    urls=[]; seen=set()
+    for url in re.findall(r'https?://[^\s|,;\)\]<>]+', str(text or '')):
+        url=url.rstrip(".\"'")
+        if url and url not in seen:
+            urls.append(url); seen.add(url)
+    return urls
+
+def safe_join(values, sep=' | '):
+    out=[]; seen=set()
+    for value in values:
+        value=clean(value)
+        if not value:
+            continue
+        n=norm(value)
+        if n and n not in seen:
+            out.append(value); seen.add(n)
+    return sep.join(out)
+
+
+def clean_public_value(value):
+    value=clean(value)
+    if not value:
+        return ''
+    parts=[part.strip() for part in value.split('|')]
+    filtered=[]
+    for part in parts:
+        if re.search(r'LBJ\s+(fields scraped|scrape status|match type|match score|resolve note|scraped at|scrape error)', part, re.I):
+            continue
+        filtered.append(part)
+    return ' | '.join(p for p in filtered if p)
+
+def make_public_row(row):
+    public={}
+    for key in PUBLIC_ROW_FIELDS:
+        val=clean_public_value(row.get(key,''))
+        if val:
+            public[key]=val
+    public['Public Data Note']=PUBLIC_DATA_NOTE
+    return public
+
 NS = {
     'main':'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
     'rel':'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
@@ -20,6 +95,24 @@ def clean(value):
 
 def norm(s):
     return re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9]+', ' ', str(s or '').lower().replace('×','x'))).strip()
+PUBLIC_MICROREGION_FIELDS = [
+    'Plant_ID', 'Scientific Name', 'recordID', 'scientificName', 'acceptedName', 'commonName',
+    'regionGroup', 'primaryMicroregion', 'secondaryMicroregions', 'fineHabitatTags',
+    'fineHabitatSummary', 'moistureWaterLight', 'wetlandStatusSummary', 'confidence',
+    'reviewNeeded', 'publicStatus', 'publicationNote', 'sourceUseNote', 'datasetVersion',
+    'lastUpdated', 'onlineSlug', 'lbjProfileURL', 'usdaPlantsURL', 'fnaSearchURL',
+    'fnaDirectCandidateURL', 'wetlandPlantListURL', 'nrcsWebSoilSurveyURL', 'nrcsEDITURL',
+    'epaEcoregionsURL', 'tpwdEMSURL'
+]
+
+def make_public_microregion_row(row):
+    public={}
+    for key in PUBLIC_MICROREGION_FIELDS:
+        val=clean_public_value(row.get(key,''))
+        if val:
+            public[key]=val
+    return public
+
 
 def col_to_index(col):
     n=0
@@ -171,6 +264,12 @@ def read_families(path):
     return raw, fam_by_norm
 
 def read_propagation(path):
+    """Read NPSOT propagation records and export public-safe summary tags.
+
+    Full propagation-method prose is intentionally not copied into browser-delivered
+    files. The public dashboard gets materials, treatment tags, source URLs, and a
+    standard note directing readers to the source pages for full instructions.
+    """
     if not path.exists():
         return [], []
     with path.open(newline='', encoding='utf-8-sig') as f:
@@ -186,63 +285,55 @@ def read_propagation(path):
 
     out=[]
     for sci, items in by_sci.items():
-        materials=[]; instructions=[]; source_urls=[]; refs=[]
-        seen_mat=set(); seen_inst=set(); seen_url=set(); seen_ref=set()
-        common_names=[]; seen_common=set()
+        materials=[]; treatments=[]; source_urls=[]; ref_urls=[]
+        common_names=[]
 
         for item in items:
             common=clean(item.get('common_name'))
-            if common and norm(common) not in seen_common:
-                common_names.append(common); seen_common.add(norm(common))
+            if common:
+                common_names.append(common)
 
             mat=clean(item.get('Material'))
             treatment=clean(item.get('Treatment'))
-            method=clean(item.get('Method'))
-            collection=clean(item.get('Collection'))
-
-            if mat and norm(mat) not in seen_mat:
-                materials.append(mat); seen_mat.add(norm(mat))
-
-            pieces=[]
             if mat:
-                pieces.append(mat)
+                materials.append(mat)
             if treatment:
-                pieces.append(f"Treatment: {treatment}")
-            if method:
-                pieces.append(f"Method: {method}")
-            if collection:
-                pieces.append(f"Collection: {collection}")
-            if pieces:
-                inst=' — '.join(pieces)
-                if norm(inst) not in seen_inst:
-                    instructions.append(inst); seen_inst.add(norm(inst))
+                treatments.append(treatment)
 
             url=clean(item.get('plant_url') or item.get('Plant URL') or item.get('NPSOT URL'))
-            if url and url not in seen_url:
-                source_urls.append(url); seen_url.add(url)
+            if url:
+                source_urls.append(url)
 
-            ref=clean(item.get('References') or item.get('Reference') or item.get('references'))
-            if ref:
-                # Keep original text but split on common line/number separators only lightly.
-                for part in re.split(r'\s*\|\s*|\n+', ref):
-                    part=clean(part)
-                    if part and part not in seen_ref:
-                        refs.append(part); seen_ref.add(part)
+            for source_field in ['References', 'Reference', 'references', 'Source URL', 'source_url']:
+                for ref_url in extract_urls(item.get(source_field,'')):
+                    ref_urls.append(ref_url)
 
         row={
             'Plant_ID': sci,
             'Scientific Name': sci,
         }
-        if common_names:
-            row['NPSOT Propagation Common Name'] = ' | '.join(common_names)
-        if materials:
-            row['NPSOT Propagation Materials'] = ' | '.join(materials)
-        if instructions:
-            row['NPSOT Propagation Instructions'] = ' || '.join(instructions)
-        if source_urls:
-            row['NPSOT Propagation Source URL'] = ' | '.join(source_urls)
+        common=safe_join(common_names)
+        mats=safe_join(materials)
+        treat=safe_join(treatments)
+        urls=safe_join(source_urls)
+        refs=safe_join(ref_urls)
+        if common:
+            row['NPSOT Propagation Common Name'] = common
+        if mats:
+            row['NPSOT Propagation Materials'] = mats
+        if treat:
+            row['NPSOT Propagation Treatment Tags'] = treat
+        note_parts=[]
+        if mats:
+            note_parts.append(f"Materials listed: {mats}.")
+        if treat:
+            note_parts.append(f"Treatment tags listed: {treat}.")
+        note_parts.append('Full propagation instructions are not reproduced in this public dataset; use the linked NPSOT/source pages for complete protocols.')
+        row['NPSOT Propagation Public Note'] = ' '.join(note_parts)
+        if urls:
+            row['NPSOT Propagation Source URL'] = urls
         if refs:
-            row['NPSOT Propagation References'] = ' | '.join(refs)
+            row['NPSOT Propagation References'] = refs
         out.append(row)
     return raw, out
 
@@ -384,7 +475,8 @@ for obj in rows:
     for key in [
         'NPSOT Propagation Common Name',
         'NPSOT Propagation Materials',
-        'NPSOT Propagation Instructions',
+        'NPSOT Propagation Treatment Tags',
+        'NPSOT Propagation Public Note',
         'NPSOT Propagation Source URL',
         'NPSOT Propagation References'
     ]:
@@ -438,7 +530,11 @@ for obj in rows:
             if (pid,n) not in seen:
                 aliases.append({'Plant_ID':pid,'Alias':alias,'Alias_Type':'npsot_common_name','Normalized_Alias':n}); seen.add((pid,n))
 
-# 7. Export data.
+# 7. Strip browser-delivered plant records down to public-safe fields.
+rows = [make_public_row(r) for r in rows]
+
+# 8. Export data.
+micro_rows_public = [make_public_microregion_row(r) for r in micro_rows]
 all_fields=[]
 for r in rows:
     for k in r.keys():
@@ -448,7 +544,7 @@ for r in rows:
 for filename, data in [
     ('plants.json', rows),
     ('plant_aliases.json', aliases),
-    ('microregions.json', micro_rows),
+    ('microregions.json', micro_rows_public),
     ('propagation_npsot.json', propagation_rows),
     ('bird_use.json', bird_rows)
 ]:
@@ -460,21 +556,21 @@ for filename, data in [
     'window.PLANT_FIELDS = '+json.dumps(all_fields, ensure_ascii=False)+';\n',
     encoding='utf-8'
 )
-(OUT/'microregions.js').write_text('window.MICROREGION_DATA = '+json.dumps(micro_rows, ensure_ascii=False)+';\n', encoding='utf-8')
+(OUT/'microregions.js').write_text('window.MICROREGION_DATA = '+json.dumps(micro_rows_public, ensure_ascii=False)+';\n', encoding='utf-8')
 (OUT/'propagation_npsot.js').write_text('window.PROPAGATION_NPSOT_DATA = '+json.dumps(propagation_rows, ensure_ascii=False)+';\n', encoding='utf-8')
 
 with (OUT/'plants.csv').open('w', newline='', encoding='utf-8-sig') as f:
     w=csv.DictWriter(f, fieldnames=all_fields); w.writeheader(); w.writerows([{k:r.get(k,'') for k in all_fields} for r in rows])
 with (OUT/'plant_aliases.csv').open('w', newline='', encoding='utf-8-sig') as f:
     w=csv.DictWriter(f, fieldnames=['Plant_ID','Alias','Alias_Type','Normalized_Alias']); w.writeheader(); w.writerows(aliases)
-if micro_rows:
+if micro_rows_public:
     micro_fields=[]
-    for r in micro_rows:
+    for r in micro_rows_public:
         for k in r.keys():
             if k not in micro_fields:
                 micro_fields.append(k)
     with (OUT/'microregions.csv').open('w', newline='', encoding='utf-8-sig') as f:
-        w=csv.DictWriter(f, fieldnames=micro_fields); w.writeheader(); w.writerows([{k:r.get(k,'') for k in micro_fields} for r in micro_rows])
+        w=csv.DictWriter(f, fieldnames=micro_fields); w.writeheader(); w.writerows([{k:r.get(k,'') for k in micro_fields} for r in micro_rows_public])
 if propagation_rows:
     prop_fields=[]
     for r in propagation_rows:
