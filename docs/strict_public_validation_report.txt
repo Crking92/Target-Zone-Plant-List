@@ -1,0 +1,3 @@
+PASS: strict public data files contain no known full NPSOT protocol phrase, no NPSOT instruction column name, no wp-admin URLs, and no Photo Credit text.
+PASS: plants.csv has no unexpected long public text fields over 450 characters.
+PASS: propagation_npsot.csv has no unexpected long public text fields over 450 characters.

@@ -543,8 +543,6 @@ const groups = [
       "Water Use",
       "Avg Height (ft)",
       "Avg Width (ft)",
-      "Size Notes",
-      "Leaf",
       "Soil Moisture"
     ]
   },
